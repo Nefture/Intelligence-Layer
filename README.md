@@ -9,6 +9,130 @@
 Nefture is developing a comprehensive institutional-grade portfolio monitoring solution specifically designed for Stellar's ecosystem. Our architecture bridges the gap between traditional finance requirements and DeFi innovation by providing deep, granular visibility into portfolio performance, risk metrics, and asset allocation across Stellar's network.
 The project transforms Stellar portfolio management from manual tracking to automated, institutional-grade monitoring with historical reconstruction capabilities. With a total budget of $91,000 USD allocated across 7 deliverables, the project spans from September 2025 to February 2026, bringing enterprise-level portfolio intelligence to Stellar.
 
+## 🏗️ This Repository - Stellar Price Oracle Foundation
+
+This repository contains the foundational components for the Nefture Intelligence Layer, specifically focusing on the **Price Oracle Infrastructure** that serves as the core pricing engine for the entire portfolio monitoring system.
+
+### What We're Building
+
+**Unified Oracle Pricer System**: A comprehensive price oracle solution that aggregates data from multiple sources to provide accurate, real-time pricing for all Stellar assets. This system forms the critical foundation for portfolio valuation and risk assessment.
+
+### Core Components
+
+#### 🔧 Smart Contracts
+- **`stellar_price_oracle.rs`**: Core price oracle smart contract with multi-source data aggregation
+- **`comprehensive_price_oracle.rs`**: Enhanced oracle with advanced features and confidence scoring
+- **`contracts/comprehensive-oracle/`**: Complete Soroban contract package with deployment configuration
+
+#### 📊 Data Feeder System
+- **`oracle-data-feeder.js`**: Real-time data fetching from Stellar DEX, AMM pools, and orderbooks
+- **`real-data-integration.js`**: Integration layer for external price feeds and data sources
+- **`price-oracle-client.js`**: Client library for interacting with oracle contracts
+
+#### 🖥️ Web Interface
+- **`stellar-pricer.html`**: Interactive dashboard for monitoring price feeds and oracle status
+- **`stellar-pricer-english.html`**: English version of the pricing dashboard
+- **`stellar.tsx`**: React components for modern web interface
+
+#### 🚀 Deployment & Integration
+- **`deploy-comprehensive.sh`**: Automated deployment script for oracle contracts
+- **`soroban-integration.sh`**: Soroban integration utilities and helpers
+- **`quick-start-deployed.sh`**: Quick start script for immediate deployment
+
+### Key Features
+
+#### Multi-Source Price Aggregation
+- **AMM Pool Data**: Real-time liquidity pool reserves and pricing
+- **Orderbook Data**: Bid/ask spreads from Stellar DEX
+- **External Oracles**: Integration with trusted price feeds
+- **Confidence Scoring**: Quality metrics based on liquidity and data freshness
+
+#### Supported Assets
+- **XLM**: Native Stellar Lumens
+- **USDC**: USD Coin (Circle)
+- **USDT**: Tether USD
+- **AQUA**: Aquarius token
+- **yXLM**: Yield-bearing XLM
+- **MOBI**: Mobius token
+- **Custom Assets**: Any Stellar asset with liquidity pools
+
+#### Real-Time Updates
+- **5-minute intervals**: Configurable update frequency
+- **Automatic retry logic**: Robust error handling and recovery
+- **Data validation**: Confidence scoring and outlier detection
+- **Historical tracking**: Complete price history for analytics
+
+### Technical Implementation
+
+#### Oracle Contract Features
+```rust
+pub struct TokenPrice {
+    pub asset_code: Symbol,
+    pub asset_issuer: Option<Address>,
+    pub price_usd: i128,        // 7-decimal fixed point precision
+    pub confidence: u32,        // 0-100 confidence score
+    pub liquidity_usd: i128,    // Total liquidity in USD
+    pub last_update: u64,       // Timestamp
+    pub sources: Vec<Symbol>,   // AMM, ORDERBOOK, ORACLE
+}
+```
+
+#### Data Feeder Capabilities
+- Direct Stellar Horizon API integration
+- AMM pool reserve monitoring
+- Orderbook depth analysis
+- Multi-source price validation
+- Automatic contract updates
+
+#### Web Dashboard Features
+- Real-time price monitoring
+- Asset portfolio tracking
+- Oracle health status
+- Historical price charts
+- Configuration management
+
+### Integration with Nefture Architecture
+
+This price oracle system directly implements **Layer 2: Normalization & Enrichment** of the Nefture architecture:
+
+- **Custom Asset Pricer**: Prices any Stellar token based on liquidity pools
+- **Price Oracle Integration**: Multi-source feeds with confidence scoring
+- **Asset Classifier**: Automatic categorization of tokens and positions
+- **Data Validation**: Outlier detection and quality assurance
+
+The oracle provides the foundational pricing data that enables:
+- Portfolio valuation and PnL calculations
+- Risk metrics computation (VaR, Sharpe ratios)
+- Performance attribution analysis
+- Cross-chain asset pricing
+
+### Quick Start
+
+1. **Deploy Oracle Contract**:
+   ```bash
+   ./deploy-comprehensive.sh
+   ```
+
+2. **Start Data Feeder**:
+   ```bash
+   node oracle-data-feeder.js
+   ```
+
+3. **Access Dashboard**:
+   Open `stellar-pricer.html` in your browser
+
+### Configuration
+
+Set environment variables for your deployment:
+```bash
+export STELLAR_NETWORK=testnet  # or mainnet
+export CONTRACT_ID=your_contract_id
+export ADMIN_SECRET_KEY=your_admin_secret_key
+export UPDATE_INTERVAL=300  # seconds
+```
+
+This price oracle foundation enables the entire Nefture Intelligence Layer by providing accurate, real-time pricing data essential for institutional-grade portfolio monitoring and risk management.
+
 ### Technical Architecture
 #### Four-Layer Architecture
 Nefture's solution consists of four integrated layers designed for institutional precision:
